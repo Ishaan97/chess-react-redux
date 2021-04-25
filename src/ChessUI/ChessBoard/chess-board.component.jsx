@@ -1,24 +1,28 @@
 import React from 'react';
-// Redux related Imports
+
 import { connect } from "react-redux";
+
+import { Link } from "react-router-dom";
 
 import { createStructuredSelector } from "reselect";
 import { selectBoardState } from "../../redux/game-state/game-state.selector";
-// Importing Components
+import { newResetGame } from "../../redux/game-state/game-state.actions";
+
 import ChessSquare from "./ChessSquare/chess-square.component";
 // Importing styles
 import './chess-board.style.css';
 
 class ChessBoard extends React.Component{
     render(){
-        let {boardState} = this.props;
-        const board = this.getBoard(boardState);
-        console.log(board);
-
+        let {boardState, resetGame} = this.props;
         return(
             <>
                 <div className="board">
                     {this.getBoard(boardState)}
+                </div>
+                <div className="game-buttons">
+                    <Link to="/" >Back</Link>
+                    <Link to="#" onClick={() => resetGame()} >Reset</Link>
                 </div>
                 
             </>
@@ -70,4 +74,8 @@ const mapStateToProps = createStructuredSelector({
     boardState : selectBoardState
 })
 
-export default connect(mapStateToProps)(ChessBoard);
+const mapDispatchToProps = dispatch => ({
+    resetGame : () => dispatch(newResetGame())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChessBoard);
