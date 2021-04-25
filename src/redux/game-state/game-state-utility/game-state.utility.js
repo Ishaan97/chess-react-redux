@@ -20,6 +20,7 @@ export function handleSquareClick({row, col}, state) {
         playerClicks = [];
         whiteToMove = !state.whiteToMove
     }
+    boardState = JSON.parse(JSON.stringify(boardState));
     return {
         boardState,
         playerClicks,

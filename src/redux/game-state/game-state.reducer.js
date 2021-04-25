@@ -25,19 +25,17 @@ export const gameStateReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case GameStateActionTypes.NEW_RESET_GAME : 
             return { ...INITIAL_STATE };
-        case GameStateActionTypes.SQUARE_CLICKED : 
-            return{
+            
+        case GameStateActionTypes.SQUARE_CLICKED :    
+            let {boardState, playerClicks, 
+                squareSelected, whiteToMove} = handleSquareClick(action.payload, state);
+            return {
                 ...state,
-                ...handleSquareClick(action.payload, state)
-            }    
-        // let {boardState, playerClicks, squareSelected, whiteToMove}= handleSquareClick(action.payload, state)
-            // return {
-            //     ...state,
-            //     boardState : boardState,
-            //     playerClicks : playerClicks,
-            //     squareSelected : squareSelected,
-            //     whiteToMove : whiteToMove
-            // }
+                boardState : boardState,
+                playerClicks : playerClicks,
+                squareSelected : squareSelected,
+                whiteToMove : whiteToMove
+            }
         default : 
             return { ...state };
     }
