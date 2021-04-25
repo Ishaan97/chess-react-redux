@@ -1,0 +1,10 @@
+.board{
+    height: 80vmin;
+    width: 80vmin;
+}
+
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
